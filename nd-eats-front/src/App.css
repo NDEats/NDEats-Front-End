@@ -7,11 +7,17 @@
 
 .orders{
   background-color: black;
-  width: 35vw;
+  min-width: 35vw;
   min-height: 100vh;
   border-radius: 15px;
   border-color: lightgreen;
   border-style: solid;
+}
+
+@media only screen and (max-width: 600px) {
+  .orders {
+    min-width: 100vw;
+  }
 }
 
 .orders h1{

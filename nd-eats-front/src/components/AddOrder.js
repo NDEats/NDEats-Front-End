@@ -11,17 +11,17 @@ function AddOrder() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="success" onClick={handleShow}>
         Make an order!
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Order Info</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -29,21 +29,52 @@ function AddOrder() {
                 autoFocus
               />
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.Location">
+              <Form.Label>Location</Form.Label>
+              <Form.Select>
+                  <option>Duncan Student Center</option>
+                  <option>Lafortune Student Center</option>
+                  <option>Hesburgh</option>
+                  <option>Hammes Bookstore</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.NbrItems">
+              <Form.Label>Number of Items</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                placeholder="1,2,3,..."
+                autoFocus
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.Pay">
+              <Form.Label>Pay</Form.Label>
+              <Form.Control
+                min="0"
+                type="number"
+                placeholder="$#"
+                autoFocus
+              />
+            </Form.Group>
+
             <Form.Group
               className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
+              controlId="exampleForm.Fullname"
             >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Label>Full name</Form.Label>
+              <Form.Control 
+                type="text"
+                placeholder="Jane Doe"
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="success" onClick={handleClose}>
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
