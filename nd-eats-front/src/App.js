@@ -1,5 +1,5 @@
 import './App.css'
-import AddOrder from './AddOrder'
+import AddOrder from './components/AddOrder'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
