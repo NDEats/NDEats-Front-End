@@ -14,7 +14,7 @@ function Orders(props) {
                     <p>Order ready by: {props.data['items'][i]['readyBy']}</p>
                     <p>Orderer's name: {props.data['items'][i]['delivererId']['name']}</p>
                     <p>Orderer's email: {props.data['items'][i]['delivererId']['email']}</p>
-                    <button id={i}>
+                    <button id={props.data['items'][i]['id']}>
                         Take Order
                     </button>
                   </div>);
