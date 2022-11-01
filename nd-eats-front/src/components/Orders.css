@@ -11,6 +11,7 @@
     border-color: darkgreen;
     border-radius: 5px;
     border-style: solid;
+    position: relative;
 }
 
 .order-info p{
@@ -18,3 +19,14 @@
     margin: 0;
     color: black;
 }
+
+.order-info button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: gold;
+    border-radius: 4px;
+    border-color: transparent;
+}
+
+
