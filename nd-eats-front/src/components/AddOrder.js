@@ -31,7 +31,7 @@ function AddOrder() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.Location">
-              <Form.Label>Location</Form.Label>
+              <Form.Label>Pickup</Form.Label>
               <Form.Select>
                   <option>Duncan Student Center</option>
                   <option>Lafortune Student Center</option>
@@ -41,17 +41,16 @@ function AddOrder() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.NbrItems">
-              <Form.Label>Number of Items</Form.Label>
+              <Form.Label>Ready By</Form.Label>
               <Form.Control
-                type="number"
+                type="time"
                 min="0"
-                placeholder="1,2,3,..."
                 autoFocus
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.Pay">
-              <Form.Label>Pay</Form.Label>
+              <Form.Label>Tip</Form.Label>
               <Form.Control
                 min="0"
                 type="number"
@@ -64,10 +63,10 @@ function AddOrder() {
               className="mb-3"
               controlId="exampleForm.Fullname"
             >
-              <Form.Label>Full name</Form.Label>
+              <Form.Label>Dropoff</Form.Label>
               <Form.Control 
                 type="text"
-                placeholder="Jane Doe"
+                placeholder="Duncan Hall"
               />
             </Form.Group>
           </Form>
