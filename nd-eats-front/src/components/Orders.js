@@ -12,8 +12,8 @@ function Orders(props) {
                     <p>Pickup Location: {props.data['items'][i]['pickup']}</p>
                     <p>Trip pay: ${props.data['items'][i]['tip']}</p>
                     <p>Order ready by: {props.data['items'][i]['readyBy']}</p>
-                    <p>Orderer's name: {props.data['items'][i]['delivererId']['name']}</p>
-                    <p>Orderer's email: {props.data['items'][i]['delivererId']['email']}</p>
+                    <p>Orderer's name: {props.data['items'][i]['ordererId']['name']}</p>
+                    <p>Orderer's email: {props.data['items'][i]['ordererId']['email']}</p>
                     <button id={props.data['items'][i]['id']}>
                         Take Order
                     </button>
