@@ -3,9 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-function AddOrder(props) {
+function Signup() {
   const [show, setShow] = useState(false);
-  const [obj, setObj] = useState({'pickup': 'Duncan Student Center', 'email': props.user['email']});
+  const [obj, setObj] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,7 +18,7 @@ function AddOrder(props) {
   }
 
   async function handleSubmit(obj){
-    const rawResponse = await fetch('http://127.0.0.1:8000/orders/', {
+    const rawResponse = await fetch('http://127.0.0.1:8000/persons/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,48 +27,32 @@ function AddOrder(props) {
     body: JSON.stringify(obj)
   });
     const content = await rawResponse.json();
+    if(content['id'] === 0){
+      alert("An account already exists with this email.");
+      return content;
+    }
     handleClose();
+    alert("Successfully signed up!")
     return content;
   }
 
   return (
     <>
       <Button variant="success" onClick={handleShow}>
-        Make an order!
+        Sign up!
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Order Info</Modal.Title>
+          <Modal.Title>Personal Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="pickup">
-              <Form.Label>Pickup</Form.Label>
-              <Form.Select onChange={handleChange}>
-                  <option>Duncan Student Center</option>
-                  <option>Lafortune Student Center</option>
-                  <option>Hesburgh</option>
-                  <option>Hammes Bookstore</option>
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="readyBy">
-              <Form.Label>Ready By</Form.Label>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email address</Form.Label>
               <Form.Control
-                type="time"
-                min="0"
-                autoFocus
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="tip">
-              <Form.Label>Tip</Form.Label>
-              <Form.Control
-                min="0"
-                type="number"
-                placeholder="$#"
+                type="email"
+                placeholder="name@example.com"
                 autoFocus
                 onChange={handleChange}
               />
@@ -76,12 +60,34 @@ function AddOrder(props) {
 
             <Form.Group
               className="mb-3"
-              controlId="dropoff"
+              controlId="name"
             >
-              <Form.Label>Dropoff</Form.Label>
+              <Form.Label>Full name</Form.Label>
               <Form.Control 
                 type="text"
-                placeholder="Duncan Hall"
+                placeholder="Jane Doe"
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group
+              className="mb-3"
+              controlId="password"
+            >
+              <Form.Label>Password</Form.Label>
+              <Form.Control 
+                type="password"
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group
+              className="mb-3"
+              controlId="venmo"
+            >
+              <Form.Label>Venmo</Form.Label>
+              <Form.Control 
+                type="text"
                 onChange={handleChange}
               />
             </Form.Group>
@@ -97,4 +103,4 @@ function AddOrder(props) {
   );
 }
 
-export default AddOrder;
+export default Signup;

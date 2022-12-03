@@ -1,29 +1,57 @@
-import { GoogleLogin } from 'react-google-login';
+import { useState } from 'react';
+import './Login.css';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 
-const clientId = '267889966853-hg5a7futo1vf63prcqc9ahnjpq83b1v1.apps.googleusercontent.com';
 
-function Login(){
-    const onSuccess = (res) => {
-        console.log('[Login Success] currentUser: ', res.profileObj);
-    };
-
-    const onFailure = (res) => {
-        console.log('[Login Failed] res: ', res);
-    };
-
-    return (
-        <div>
-            <GoogleLogin
-                clientId={clientId}
-                buttonText="Login"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={'single_host_origin'}
-                style={{ marginTop: '100px' }}
-                isSignedIn={true}
-                />
-        </div>
-    );
+async function loginUser(credentials) {
+    return fetch('http://127.0.0.1:8000/persons/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
 }
 
-export default Login
+export default function Login({ setToken }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await loginUser({
+      email,
+      password
+    });
+    setToken(token);
+  }
+
+  return(
+    <div className="login-wrapper">
+      <h1>Please Log In</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <p>Email</p>
+          <input type="email" onChange={e => setEmail(e.target.value)}/>
+        </label>
+        <label>
+          <p>Password</p>
+          <input type="password" onChange={e => setPassword(e.target.value)}/>
+        </label>
+        <div>
+        <div>
+          <Button variant="success" type="submit">
+                Submit
+          </Button>
+        </div>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
