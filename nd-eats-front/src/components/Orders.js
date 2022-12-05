@@ -20,6 +20,7 @@ function Orders(props) {
       const response = await fetch("http://127.0.0.1:8000/orders/");
       const data = await response.json();
       props.dataSetter(data);
+      console.log(content);
 
       return content;
     }
@@ -33,7 +34,6 @@ function Orders(props) {
         <p>Pickup Location: {data['pickup']}</p>
         <p>Trip pay: ${data['tip']}</p>
         <p>Order ready by: {data['readyBy']}</p>
-        <p>Orderer's name: {data['ordererId']['name']}</p>
         <p>Orderer's email: {data['ordererId']['email']}</p>
 
         <Button variant="success" id={data['id']} onClick={handleSubmit}>
