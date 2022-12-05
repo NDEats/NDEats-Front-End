@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function MyOrders(props) {
 
     if((Object.keys(props.data).length) > 0){
-      var data = props.data['items'].filter(dict => dict.ordererId.id ==  props.user['id']).sort((a,b) => b.readyBy.localeCompare(a.readyBy));
+      var data = props.data['items'].filter(dict => dict.ordererId.id ===  props.user['id']).sort((a,b) => b.readyBy.localeCompare(a.readyBy));
 
       var result = data.map((data)=> 
       <div className='order-info'>
