@@ -28,13 +28,18 @@ function AddOrder(props) {
   });
     const content = await rawResponse.json();
     handleClose();
+
+    const response = await fetch("http://127.0.0.1:8000/orders/");
+    const data = await response.json();
+    props.dataSetter(data);
+    
     return content;
   }
 
   return (
     <>
       <Button variant="success" onClick={handleShow}>
-        Make an order!
+        Make Order!
       </Button>
 
       <Modal show={show} onHide={handleClose}>

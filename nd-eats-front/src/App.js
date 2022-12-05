@@ -6,6 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Signup from './components/Signup';
+import MyOrders from './components/MyOrders';
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import About from './components/About'
+
+
 
 function getToken() {
   const tokenString = sessionStorage.getItem('token');
@@ -64,13 +70,41 @@ function App() {
           <div className="orders">
             <header>
               <h1>NDeats</h1>
-              <AddOrder user={session}/>
+              <Link to="/myorders">
+                <Button variant="success">My Orders</Button>
+              </Link>
+              <AddOrder user={session} dataSetter={setData}/>
             </header>
-            <Orders data={data}/>
+            <Orders data={data} user={session} dataSetter={setData}/>
           </div>
         </div>}/>
+
+        <Route path="/myorders" element={
+        <div className="App">
+          <div className="orders">
+            <header>
+              <h1>My Orders</h1>
+              <Link to="/">
+                <Button variant="success">Home</Button>
+              </Link>
+            </header>
+            <MyOrders data={data} user={session}/>
+          </div>
+        </div>}/>
+
+        <Route path="*" element={
+          <div>
+            <h1>404 Error</h1>
+            <h1>Page not found</h1>
+          </div>
+        }/>
+
+        <Route path="/about" element={
+          <About />
+        }/>
       </Routes>
     </BrowserRouter>
+
   );
 }
 
