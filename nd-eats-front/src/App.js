@@ -88,7 +88,7 @@ function App() {
                 <Button variant="success">Home</Button>
               </Link>
             </header>
-            <MyOrders data={data} user={session}/>
+            <MyOrders user={session}/>
           </div>
         </div>}/>
 

@@ -20,7 +20,6 @@ function Orders(props) {
       const response = await fetch("http://127.0.0.1:8000/orders/");
       const data = await response.json();
       props.dataSetter(data);
-      console.log(content);
 
       return content;
     }
