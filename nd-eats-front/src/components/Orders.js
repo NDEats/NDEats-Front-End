@@ -19,8 +19,23 @@ function Orders(props) {
       body: JSON.stringify(the_dict)
       });
       const content = await rawResponse.json();
+      const successfulLookup = position => {
+          const { latitude, longitude } = position.coords;
+          fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=1234`)
+              .then(response => response.json();
+              .then(geo => {console.log}); // Or do whatever you want with the result
+      
+      if(window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(console.log, console.log);
+        getCurrentPosition(successfulLookup, console.log);
+      }
+      
+      if(geo == undefined) {
+        const response = await fetch("http://127.0.0.1:8000/orders/");
+      } else {
+        const response = await fetch(`http://127.0.0.1:8000/orders/ -d "{\"geo\":\"geo\"}"`);
+      }
 
-      const response = await fetch("http://127.0.0.1:8000/orders/");
       const data = await response.json();
       props.dataSetter(data);
       openInNewTab(content['rlink']);
