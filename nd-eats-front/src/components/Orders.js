@@ -31,7 +31,8 @@ function Orders(props) {
         <p>Pickup Location: {data['pickup']}</p>
         <p>Trip pay: ${data['tip']}</p>
         <p>Order ready by: {data['readyBy']}</p>
-        <p>Orderer's email: {data['ordererId']['email']}</p>
+        <p>Orderer's name: {data['orderer_name']}</p>
+        <p>Orderer's email: {data['orderer_email']}</p>
 
         <Button variant="success" id={data['id']} onClick={handleSubmit}>
           Take Order
