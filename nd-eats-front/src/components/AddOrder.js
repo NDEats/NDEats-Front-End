@@ -51,10 +51,18 @@ function AddOrder(props) {
             <Form.Group className="mb-3" controlId="pickup">
               <Form.Label>Pickup</Form.Label>
               <Form.Select onChange={handleChange}>
-                  <option>Duncan Student Center</option>
-                  <option>Lafortune Student Center</option>
-                  <option>Hesburgh</option>
-                  <option>Hammes Bookstore</option>
+                  <option>Chic-fil-A</option>
+                  <option>Modern Market</option>
+                  <option>Hagerty Family Cafe</option>
+                  <option>Smashburger</option>
+                  <option>Taco Bell</option>
+                  <option>Starbucks</option>
+                  <option>Flip Kitchen</option>
+                  <option>The Noodle Nook</option>
+                  <option>Au Bon Pain</option>
+                  <option>Garbanzo Mediterranean Fresh</option>
+                  <option>Decio Cafe</option>
+                  <option>The Gilded Bean</option>
               </Form.Select>
             </Form.Group>
 
