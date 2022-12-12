@@ -51,7 +51,7 @@ function AddOrder(props) {
             <Form.Group className="mb-3" controlId="pickup">
               <Form.Label>Pickup</Form.Label>
               <Form.Select onChange={handleChange}>
-                  <option>Chic-fil-A</option>
+                  <option>Chick-fil-A</option>
                   <option>Modern Market</option>
                   <option>Hagerty Family Cafe</option>
                   <option>Smashburger</option>
