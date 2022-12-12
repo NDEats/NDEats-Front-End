@@ -3,10 +3,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
-const openInNewTab = url => {
-  window.open(url, '_blank', 'noopener,noreferrer');
-};
-
 function Orders(props) {
     async function handleSubmit(event){
       const the_dict = {'email': props.user['email']};
@@ -23,7 +19,6 @@ function Orders(props) {
       const response = await fetch("http://127.0.0.1:8000/orders/");
       const data = await response.json();
       props.dataSetter(data);
-      openInNewTab(content['rlink']);
       return content;
     }
 
@@ -36,7 +31,8 @@ function Orders(props) {
         <p>Pickup Location: {data['pickup']}</p>
         <p>Trip pay: ${data['tip']}</p>
         <p>Order ready by: {data['readyBy']}</p>
-        <p>Orderer's email: {data['ordererId']['email']}</p>
+        <p>Orderer's name: {data['orderer_name']}</p>
+        <p>Orderer's email: {data['orderer_email']}</p>
 
         <Button variant="success" id={data['id']} onClick={handleSubmit}>
           Take Order
