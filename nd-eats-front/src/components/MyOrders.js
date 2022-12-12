@@ -22,15 +22,20 @@ function MyOrders(props) {
   }, [props.user]);
 
     if((Object.keys(data).length) > 0){
-      var filtered_data = data['active_orders'].sort((a,b) => b.readyby.localeCompare(a.readyby));
-      var result = filtered_data.map((data)=> 
+      var my_orders = data['current_orders'].sort((a,b) => b.readyby.localeCompare(a.readyby));
+      //var my_past_orders = data['old_orders'].sort((a,b) => b.readyby.localeCompare(a.readyby));
+      //var orders_to_deliver = data['picked_up_orders'].sort((a,b) => b.readyby.localeCompare(a.readyby));
+
+      var result = my_orders.map((data)=> 
       <div className='order-info'>
         <p>Dropoff Location: {data['dropoff']}</p>
         <p>Pickup Location: {data['pickup']}</p>
         <p>Trip pay: ${data['tip']}</p>
         <p>Order ready by: {data['readyby']}</p>
-        <p>Orderer's name: {data['ordererId']['name']}</p>
-        <p>Orderer's email: {data['ordererId']['email']}</p>
+        <p>Orderer's name: {data['orderer_name']}</p>
+        <p>Orderer's email: {data['orderer_email']}</p>
+        <p>Deliverer's name: {data['deliverer_name']}</p>
+        <p>Deliverer's email: {data['deliverer_email']}</p>
       </div>);
     }
 
