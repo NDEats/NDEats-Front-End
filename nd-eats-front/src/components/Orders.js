@@ -3,6 +3,21 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
+function componentDidMount() {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      // Send these values to frontend in format
+      // data['latitude']  = position.coords.latitude
+      // data['longitude'] = position.coords.longitude
+      console.log("lat:", position.coords.latitude);
+      console.log("long:", position.coords.longitude);
+    });
+  } else {
+    console.log("Not Available");
+  }
+}
+
+
 function Orders(props) {
     async function handleSubmit(event){
       const the_dict = {'email': props.user['email']};
@@ -21,6 +36,8 @@ function Orders(props) {
       props.dataSetter(data);
       return content;
     }
+
+    componentDidMount();
 
     if((Object.keys(props.data).length) > 0){
       var data = props.data['items'].sort((a,b) => b.readyBy.localeCompare(a.readyBy));
