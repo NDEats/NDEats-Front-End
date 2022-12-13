@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/NDEats-Front-End/static/css/main.4ca3ee12.css",
-    "main.js": "/NDEats-Front-End/static/js/main.c5faf13b.js",
+    "main.js": "/NDEats-Front-End/static/js/main.f68818e7.js",
     "static/js/787.bd353b6a.chunk.js": "/NDEats-Front-End/static/js/787.bd353b6a.chunk.js",
     "static/media/bridget.jpg": "/NDEats-Front-End/static/media/bridget.27052be04996db611515.jpg",
     "static/media/selina.jpg": "/NDEats-Front-End/static/media/selina.a9bc47f9aeaeb68461f9.jpg",
     "static/media/chris.jpg": "/NDEats-Front-End/static/media/chris.c8ec0d4d3cf76b874fce.jpg",
     "index.html": "/NDEats-Front-End/index.html",
     "main.4ca3ee12.css.map": "/NDEats-Front-End/static/css/main.4ca3ee12.css.map",
-    "main.c5faf13b.js.map": "/NDEats-Front-End/static/js/main.c5faf13b.js.map",
+    "main.f68818e7.js.map": "/NDEats-Front-End/static/js/main.f68818e7.js.map",
     "787.bd353b6a.chunk.js.map": "/NDEats-Front-End/static/js/787.bd353b6a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4ca3ee12.css",
-    "static/js/main.c5faf13b.js"
+    "static/js/main.f68818e7.js"
   ]
 }
