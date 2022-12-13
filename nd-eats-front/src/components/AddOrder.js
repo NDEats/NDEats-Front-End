@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 
 function AddOrder(props) {
   const [show, setShow] = useState(false);
-  const [obj, setObj] = useState({'pickup': 'Duncan Student Center', 'email': props.user['email']});
+  const [obj, setObj] = useState({'pickup': 'Chick-fil-A', 'email': props.user['email']});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
