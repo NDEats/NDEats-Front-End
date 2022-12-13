@@ -40,7 +40,7 @@ function Orders(props) {
     componentDidMount();
 
     if((Object.keys(props.data).length) > 0){
-      var data = props.data['items'].sort((a,b) => b.readyBy.localeCompare(a.readyBy));
+      var data = props.data['items'].sort((a,b) => a.distance_from_user - b.distance_from_user);
       
       var result = data.map((data)=> 
       <div className='order-info'>
