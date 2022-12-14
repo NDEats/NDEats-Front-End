@@ -18,7 +18,7 @@ function AddOrder(props) {
   }
 
   async function handleSubmit(obj){
-    const rawResponse = await fetch('http://127.0.0.1:8000/orders/', {
+    const rawResponse = await fetch('http://db8.cse.nd.edu:5005/orders/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -29,7 +29,7 @@ function AddOrder(props) {
     const content = await rawResponse.json();
     handleClose();
 
-    const response = await fetch("http://127.0.0.1:8000/orders/");
+    const response = await fetch("http://db8.cse.nd.edu:5005/orders/");
     const data = await response.json();
     props.dataSetter(data);
     

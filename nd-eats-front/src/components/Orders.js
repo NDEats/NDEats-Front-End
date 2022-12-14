@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Orders(props) {
     async function handleSubmit(event){
       const the_dict = {'email': props.user['email']};
-      const rawResponse = await fetch(`http://127.0.0.1:8000/update-order/${event['target']['id']}`, {
+      const rawResponse = await fetch(`http://db8.cse.nd.edu:5005/update-order/${event['target']['id']}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
@@ -16,7 +16,7 @@ function Orders(props) {
       });
       const content = await rawResponse.json();
 
-      const response = await fetch("http://127.0.0.1:8000/orders/");
+      const response = await fetch("http://db8.cse.nd.edu:5005/orders/");
       const data = await response.json();
       props.dataSetter(data);
       return content;

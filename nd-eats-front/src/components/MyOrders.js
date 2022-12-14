@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 const getPersonOrders = async (the_user) => {
-    const response = await fetch(`http://127.0.0.1:8000/persons/${the_user['id']}`);
+    const response = await fetch(`http://db8.cse.nd.edu:5005/persons/${the_user['id']}`);
     const data = await response.json();
     return data;
 };

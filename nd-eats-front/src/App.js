@@ -31,7 +31,7 @@ function App() {
   const [token, setToken] = useState({'message': 'Not Logged in yet', 'id': 2});
 
   const getData = async () => {
-    const response = await fetch("http://127.0.0.1:8000/orders/");
+    const response = await fetch("http://db8.cse.nd.edu:5005/orders/");
     const data = await response.json();
     return data;
   };
