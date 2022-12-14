@@ -3,6 +3,21 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
+function componentDidMount() {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      // Send these values to frontend in format
+      // data['latitude']  = position.coords.latitude
+      // data['longitude'] = position.coords.longitude
+      console.log("lat:", position.coords.latitude);
+      console.log("long:", position.coords.longitude);
+    });
+  } else {
+    console.log("Not Available");
+  }
+}
+
+
 function Orders(props) {
     async function handleSubmit(event){
       const the_dict = {'email': props.user['email']};
@@ -22,8 +37,11 @@ function Orders(props) {
       return content;
     }
 
+    componentDidMount();
+
     if((Object.keys(props.data).length) > 0){
-      var data = props.data['items'].sort((a,b) => b.readyBy.localeCompare(a.readyBy));
+      var data = props.data['items'].sort((a,b) => a.readyBy.localeCompare(b.readyBy));
+      data = data.sort((a,b) => a.distance_from_user - b.distance_from_user);
       
       var result = data.map((data)=> 
       <div className='order-info'>
