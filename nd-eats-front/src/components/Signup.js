@@ -5,35 +5,46 @@ import Modal from 'react-bootstrap/Modal';
 
 function Signup() {
   const [show, setShow] = useState(false);
-  const [obj, setObj] = useState({});
+  const [signUpForm, setsignUpForm] = useState({});
 
   const handleClose = () => setShow(false);
+
   const handleShow = () => setShow(true);
+  
   const handleChange = (e) => {
     const currKey = e['target']['id'];
     const currVal = e['target']['value'];
-    const addedKeyObj = obj;
-    addedKeyObj[currKey] = currVal;
-    setObj(addedKeyObj);
+    const currSignUpForm = signUpForm;
+    currSignUpForm[currKey] = currVal;
+    setsignUpForm(currSignUpForm);
   }
 
   async function handleSubmit(obj){
-    const rawResponse = await fetch('http://127.0.0.1:8000/persons/', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
-  });
-    const content = await rawResponse.json();
-    if(content['id'] === 0){
-      alert("An account already exists with this email.");
-      return content;
+    try{
+      var rawResponse = await fetch('http://127.0.0.1:8000/persons/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(signUpForm)
+      });
     }
+    catch(err){
+      console.log(err);
+    }
+
+    const userInfo = await rawResponse.json();
+
+    if(userInfo['id'] === 0){
+      alert("An account already exists with this email.");
+      return userInfo;
+    }
+
     handleClose();
+    
     alert("Successfully signed up!")
-    return content;
+    return userInfo;
   }
 
   return (

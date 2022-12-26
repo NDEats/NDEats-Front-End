@@ -3,8 +3,11 @@ import '../styling/Login.css';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
+export default function Login({ setToken }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-async function loginUser(credentials) {
+  async function loginUser(credentials) {
     return fetch('http://127.0.0.1:8000/persons/', {
       method: 'POST',
       headers: {
@@ -13,11 +16,7 @@ async function loginUser(credentials) {
       body: JSON.stringify(credentials)
     })
       .then(data => data.json())
-}
-
-export default function Login({ setToken }) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -42,9 +41,7 @@ export default function Login({ setToken }) {
         </label>
         <div>
         <div>
-          <Button variant="success" type="submit">
-                Submit
-          </Button>
+          <Button variant="success" type="submit">Submit</Button>
         </div>
         </div>
       </form>

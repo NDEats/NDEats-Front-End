@@ -21,7 +21,6 @@ function App() {
   }
 
   const session = getToken();
-
   const [token, setToken] = useState({'message': 'Not Logged in yet', 'id': 2});
 
   useEffect(() => {
@@ -38,23 +37,12 @@ function App() {
     getOrderData();
   }, []);
 
-  if(token['id'] === 2 && !session) {
-    return (<div className='credentials-page'>
-              <Login setToken={setToken} />
-              <Signup />
-            </div>)
-  }
-  else if(token['id'] === 0 && !session){
-    return (<div className='credentials-page'>
-              <Login setToken={setToken} />
-              <span style={{ color: 'red' }}>Incorrect username or password!</span>
-              <Signup />
-            </div>)
-      
-  }
-  else if(!session){
+  if(token['id'] === 2) 
+    return (<div className='credentials-page'><Login setToken={setToken} /><Signup /></div>)
+  else if(token['id'] === 0)
+    return (<div className='credentials-page'><Login setToken={setToken} /><span style={{ color: 'red' }}>Incorrect username or password!</span><Signup /></div>)
+  else 
     sessionStorage.setItem('token', JSON.stringify(token));
-  }
 
   return (
     <BrowserRouter>
