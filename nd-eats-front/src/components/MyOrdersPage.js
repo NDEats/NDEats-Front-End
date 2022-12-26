@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import '../styling/MyOrdersPage.css'
 import MyOrders from './MyOrders';
+import About from './About'
 
 function MyOrdersPage(props) {
   return (
@@ -14,6 +15,9 @@ function MyOrdersPage(props) {
                 </Link>
             </header>
             <MyOrders user={props.user}/>
+            <Link to="/about">
+              <p style={{textAlign: 'center'}}>About us</p>
+            </Link>
         </div>
     </div>
   );

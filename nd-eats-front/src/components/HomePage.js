@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import '../styling/HomePage.css'
 import AddOrder from './AddOrder'
 import Orders from './Orders'
+import About from './About'
 
 
 function HomePage(props) {
@@ -17,6 +18,9 @@ function HomePage(props) {
                 <AddOrder user={props.user} setOrderData={props.setOrderData}/>
             </header>
             <Orders orderData={props.orderData} user={props.user} setOrderData={props.setOrderData}/>
+            <Link to="/about">
+              <p style={{textAlign: 'center'}}>About us</p>
+            </Link>
         </div>
     </div>
   );
