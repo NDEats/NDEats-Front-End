@@ -1,0 +1,39 @@
+.all-my-orders{
+    overflow-y:auto;
+}
+
+.my-order-info{
+    width: 100%;
+    height: fit-content;
+    margin: 10px 0px;
+    background-color: lightgreen;
+    color: white;
+    border-color: darkgreen;
+    border-radius: 5px;
+    border-style: solid;
+    position: relative;
+}
+
+.my-order-info p{
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.my-order-info button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+.my-orders-title{
+    color: lightgreen;
+    text-align: center;
+}
+
+
+.my-orders-title{
+    color: lightgreen;
+    text-align: center;
+}

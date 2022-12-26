@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import './Login.css';
+import '../styling/Login.css';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
 
 async function loginUser(credentials) {
-    return fetch('http://db8.cse.nd.edu:5005/persons/', {
+    return fetch('http://127.0.0.1:8000/persons/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

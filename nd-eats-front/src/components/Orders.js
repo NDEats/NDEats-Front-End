@@ -1,70 +1,62 @@
-import './Orders.css'
+import '../styling/Orders.css'
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
-
-function componentDidMount() {
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      // Send these values to frontend in format
-      // data['latitude']  = position.coords.latitude
-      // data['longitude'] = position.coords.longitude
-      console.log("lat:", position.coords.latitude);
-      console.log("long:", position.coords.longitude);
-    });
-  } else {
-    console.log("Not Available");
-  }
-}
-
 
 function Orders(props) {
-    async function handleSubmit(event){
-      const the_dict = {'email': props.user['email']};
-      const rawResponse = await fetch(`http://db8.cse.nd.edu:5005/update-order/${event['target']['id']}`, {
+  
+  const getOrderData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/orders/");
+      const data = await response.json();
+      props.setOrderData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleSubmit(event){
+    const userCredentials = {'email': props.user['email']};
+    const orderId = event['target']['id'];
+    try{
+      var rawResponse = await fetch(`http://127.0.0.1:8000/update-order/${orderId}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(the_dict)
+      body: JSON.stringify(userCredentials)
       });
-      const content = await rawResponse.json();
-
-      const response = await fetch("http://db8.cse.nd.edu:5005/orders/");
-      const data = await response.json();
-      props.dataSetter(data);
-      return content;
+    }
+    catch(err) {
+      console.log(err);
     }
 
-    componentDidMount();
+    getOrderData();
 
-    if((Object.keys(props.data).length) > 0){
-      var data = props.data['items'].sort((a,b) => a.readyBy.localeCompare(b.readyBy));
-      data = data.sort((a,b) => a.distance_from_user - b.distance_from_user);
-      
-      var result = data.map((data)=> 
-      <div className='order-info'>
-        <p>Dropoff Location: {data['dropoff']}</p>
-        <p>Pickup Location: {data['pickup']}</p>
-        <p>Trip pay: ${data['tip']}</p>
-        <p>Order ready by: {data['readyBy']}</p>
-        <p>Orderer's name: {data['orderer_name']}</p>
-        <p>Orderer's email: {data['orderer_email']}</p>
+    return rawResponse;
+  }
 
-        <Button variant="success" id={data['id']} onClick={handleSubmit}>
-          Take Order
-        </Button>
+  if((Object.keys(props.orderData).length) > 0){
+    var data = props.orderData['items'].sort((a,b) => a.readyBy.localeCompare(b.readyBy));
+    var result = data.map((data)=> 
+    <div className='order-info'>
+      <p>Dropoff Location: {data['dropoff']}</p>
+      <p>Pickup Location: {data['pickup']}</p>
+      <p>Trip pay: ${data['tip']}</p>
+      <p>Order ready by: {data['readyBy']}</p>
+      <p>Orderer's name: {data['orderer_name']}</p>
+      <p>Orderer's email: {data['orderer_email']}</p>
 
-      </div>);
-    }
+      <Button variant="success" id={data['id']} onClick={handleSubmit}>
+        Take Order
+      </Button>
+
+    </div>);
+  }
 
   return (
     <div className='all-orders'>
         {result}
-        <Link to="/about">
-            <p style={{textAlign: 'center'}}>About us</p>
-        </Link>
     </div>
   );
 }

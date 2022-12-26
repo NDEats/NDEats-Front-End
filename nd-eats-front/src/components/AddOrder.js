@@ -5,35 +5,50 @@ import Modal from 'react-bootstrap/Modal';
 
 function AddOrder(props) {
   const [show, setShow] = useState(false);
-  const [obj, setObj] = useState({'pickup': 'Chick-fil-A', 'email': props.user['email']});
+
+  const [orderDetails, setOrderDetails] = useState({'email': props.user['email']});
 
   const handleClose = () => setShow(false);
+
   const handleShow = () => setShow(true);
+
+  const getOrderData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/orders/");
+      const data = await response.json();
+      props.setOrderData(data);
+      console.log("new data in");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleChange = (e) => {
     const currKey = e['target']['id'];
     const currVal = e['target']['value'];
-    const addedKeyObj = obj;
-    addedKeyObj[currKey] = currVal;
-    setObj(addedKeyObj);
+    const currOrderDetails = orderDetails;
+    currOrderDetails[currKey] = currVal;
+    setOrderDetails(currOrderDetails);
   }
 
-  async function handleSubmit(obj){
-    const rawResponse = await fetch('http://db8.cse.nd.edu:5005/orders/', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
-  });
-    const content = await rawResponse.json();
-    handleClose();
+  async function handleSubmit(orderDetails){
+    try{
+      var rawResponse = await fetch('http://127.0.0.1:8000/orders/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderDetails)
+      });
+    }
+    catch(err){
+      console.log(err);
+    }
 
-    const response = await fetch("http://db8.cse.nd.edu:5005/orders/");
-    const data = await response.json();
-    props.dataSetter(data);
-    
-    return content;
+    handleClose();
+    getOrderData();
+    return rawResponse;
   }
 
   return (
@@ -101,7 +116,7 @@ function AddOrder(props) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" type="submit" onClick={() => handleSubmit(obj)}>
+          <Button variant="success" type="submit" onClick={() => handleSubmit(orderDetails)}>
                 Submit
             </Button>
         </Modal.Footer>

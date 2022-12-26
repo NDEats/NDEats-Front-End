@@ -1,0 +1,25 @@
+@media only screen and (max-width: 600px) {
+  .homePageChildDiv, .myOrdersPageChildDiv {
+    min-width: 100vw;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .homePageChildDiv, .myOrdersPageChildDiv {
+    min-width: 35vw;
+  }
+}
+
+.credentials-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20vh;
+    background-color: #282c34;
+    min-height: 100vh;
+    color: white;
+}
+
+.mb-3{
+  width: 100%;
+}

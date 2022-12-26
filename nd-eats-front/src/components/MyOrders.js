@@ -1,50 +1,53 @@
-import './Orders.css'
+import '../styling/MyOrders.css'
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-
-
-const getPersonOrders = async (the_user) => {
-    const response = await fetch(`http://db8.cse.nd.edu:5005/persons/${the_user['id']}`);
-    const data = await response.json();
-    return data;
-};
 
 
 
 function MyOrders(props) {
-  const [data, setData] = useState([]);
+  const [userOrderData, setUserOrderData] = useState([]);
+  const [submitCounter, setSubmitCounter] = useState(0);
+
 
   async function handleSubmit(event){
-    const rawResponse = await fetch(`http://127.0.0.1:8000/update-order/${event['target']['id']}`, {
-    method: 'DELETE',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    });
-    const content = await rawResponse.json();
-  
-    getPersonOrders(props.user)
-      .then(data => setData(data))
-      .catch(error => {
-        console.log(error)
+    try{
+      const orderId = event['target']['id'];
+      var rawResponse = await fetch(`http://127.0.0.1:8000/update-order/${orderId}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
       });
-    return content;
+    }
+    catch(err){
+      console.log(err);
+    }
+    setSubmitCounter(submitCounter + 1);
+
+    return rawResponse;
   }
 
   useEffect(() => {
-    getPersonOrders(props.user)
-      .then(data => setData(data))
-      .catch(error => {
-        console.log(error)
-      });
-  }, [props.user]);
+    const getPersonOrders = async (user) => {
+      try{
+      const response = await fetch(`http://127.0.0.1:8000/persons/${user['id']}`);
+      const userOrders = await response.json();
+      setUserOrderData(userOrders);
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    
+    getPersonOrders(props.user);
+
+  }, [submitCounter, props.user]);
 
 
-  if((Object.keys(data).length) > 0){
-    var current_orders = data['current_orders'];
+  if((Object.keys(userOrderData).length) > 0){
+    var current_orders = userOrderData['current_orders'];
     var current_orders_result = current_orders.map((data)=> 
     <div className='order-info'>
       <p>Dropoff Location: {data['dropoff']}</p>
@@ -55,7 +58,7 @@ function MyOrders(props) {
       <p>Deliverer's email: {data['deliverer_email']}</p>
     </div>);
 
-    var old_orders = data['old_orders'];
+    var old_orders = userOrderData['old_orders'];
     var old_orders_result = old_orders.map((data)=> 
     <div className='order-info'>
       <p>Dropoff Location: {data['dropoff']}</p>
@@ -66,9 +69,9 @@ function MyOrders(props) {
       <p>Deliverer's email: {data['deliverer_email']}</p>
     </div>);
 
-    var pickedup_orders = data['pickedup_orders'];
+    var pickedup_orders = userOrderData['pickedup_orders'];
     var pickedup_orders_result = pickedup_orders.map((data)=> 
-    <div className='order-info'>
+    <div className='my-order-info'>
       <p>Dropoff Location: {data['dropoff']}</p>
       <p>Pickup Location: {data['pickup']}</p>
       <p>Trip pay: ${data['tip']}</p>
@@ -83,16 +86,13 @@ function MyOrders(props) {
 
 
   return (
-    <div className='all-orders'>
+    <div className='all-my-orders'>
         <p className='my-orders-title'>Picked up orders</p>
         {pickedup_orders_result}
         <p className='my-orders-title'>Current orders</p>
         {current_orders_result}
         <p className='my-orders-title'>Old orders</p>
         {old_orders_result}
-        <Link to="/about">
-            <p style={{textAlign: 'center'}}>About us</p>
-        </Link>
     </div>
   );
 }

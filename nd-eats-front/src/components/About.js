@@ -1,4 +1,4 @@
-import './About.css'
+import '../styling/About.css'
 import React from 'react';
 var chris = require('../assets/chris.jpg');
 var selina = require('../assets/selina.jpg');

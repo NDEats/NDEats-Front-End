@@ -1,0 +1,32 @@
+.myOrdersPage {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    min-width: fit-content;
+}
+
+.myOrdersPageChildDiv{
+    background-color: black;
+    width: 35vw;
+    min-height: 100vh;
+    border-radius: 15px;
+    border-color: lightgreen;
+    border-style: solid;
+}
+
+.myOrdersPageChildDiv h1{
+    color: lightgreen;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 50px;
+    margin: 0px 0px 0px 10px;
+}
+  
+.myOrdersPageChildDiv header{
+    display: flex;
+    justify-content:space-between;
+    margin: 5px;
+    align-items: center;
+}
+  

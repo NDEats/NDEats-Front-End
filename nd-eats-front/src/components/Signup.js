@@ -18,7 +18,7 @@ function Signup() {
   }
 
   async function handleSubmit(obj){
-    const rawResponse = await fetch('http://db8.cse.nd.edu:5005/persons/', {
+    const rawResponse = await fetch('http://127.0.0.1:8000/persons/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

@@ -1,0 +1,31 @@
+.homePage {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    min-width: fit-content;
+}
+
+.homePageChildDiv{
+    background-color: black;
+    min-height: 100vh;
+    border-radius: 15px;
+    border-color: lightgreen;
+    border-style: solid;
+}
+
+.homePageChildDiv h1{
+    color: lightgreen;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 50px;
+    margin: 0px 0px 0px 10px;
+}
+  
+.homePageChildDiv header{
+    display: flex;
+    justify-content:space-between;
+    margin: 5px;
+    align-items: center;
+}
+  
